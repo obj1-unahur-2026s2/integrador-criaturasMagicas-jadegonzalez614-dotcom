@@ -1,9 +1,76 @@
-import example.pepita
+import example.*
 
-describe "group of tests for pepita" {
+describe "Criaturas del bosque" {
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+  test "instanciar un hada"{
+    const hada = new Hadas(poderMagico = 45, astucia = 12, rol = "jardinero")
+    assert.equals(hada.astucia(), 12)
   }
+
+  test "un domador tiene dos mascotas que tienen cuernos"{
+    const dragon = new Mascota(edad = 20, tieneCuernos = true)
+    const ardilla = new Mascota(edad = 13, tieneCuernos = true)
+    const domador = new Domador(mascotas = [dragon, ardilla])
+
+    const hada1 = new Hadas(poderMagico = 45, astucia = 12, rol = domador)
+    hada1.aumentaKm(10)
+
+    //assert.equals(domador.edadMascota(dragon), 2)
+    //assert.equals(domador.poderOfencivoExtra(), 300)
+    //assert.equals(hada1.poderOfensivo(), 750)
+    //assert.equals(hada1.rol(), domador)
+    assert.that(hada1.esExtraordinario())
+  }
+
+  test "Modelar un duende"{
+    const hechi = new Hechicero()
+    const duende1 = new Duende(poderMagico = 20, astucia = 10, rol = hechi)
+    //assert.equals(duende1.poderOfensivo(), 220)
+
+    duende1.cambiarDeRol()
+
+    assert.equals(duende1.poderOfensivo(), 330)
+    assert.notThat(duende1.esExtraordinario())
+  }
+
+  test "Guerra entre colonias"{
+    const dragon1 = new Mascota(edad = 20, tieneCuernos = true)
+    const ardilla1 = new Mascota(edad = 13, tieneCuernos = true)
+    const domador1 = new Domador(mascotas = [dragon1, ardilla1])
+    const hada2 = new Hadas(poderMagico = 45, astucia = 12, rol = domador1)
+
+    const hechi1 = new Hechicero()
+    const duende2 = new Duende(poderMagico = 20, astucia = 10, rol = hechi1)
+
+    const col = new Colonia(criaturasC = [hada2, duende2])
+
+
+
+    const dragon2 = new Mascota(edad = 20, tieneCuernos = true)
+    const ardilla2 = new Mascota(edad = 13, tieneCuernos = true)
+    const domador2 = new Domador(mascotas = [dragon2, ardilla2])
+    const hada3 = new Hadas(poderMagico = 20, astucia = 12, rol = domador2)
+
+    const hechi2 = new Hechicero()
+    const duende3 = new Duende(poderMagico = 30, astucia = 10, rol = hechi2)
+
+    const col1 = new Colonia(criaturasC = [hada3,duende3])
+    const areaa = new AreaLosClaros(coloni = col1)
+
+    assert.equals(areaa.poderDefensivo(), 930)
+
+    areaa.peleaCon(col)
+
+    //Gana la otra colonia
+    assert.equals(areaa.poderDefensivo(),1070 )
+
+  }
+
+
+
+
+
+
+
 
 }
